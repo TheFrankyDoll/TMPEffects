@@ -36,7 +36,7 @@ namespace TMPEffects.SerializedCollections.Editor
         }
         private static GUIContent _displayTypeToggleContent;
 
-        private Dictionary<string, SerializedDictionaryInstanceDrawer> _arrayData = new();
+        private Dictionary<string, SerializedDictionaryInstanceDrawer> _arrayData = new Dictionary<string, SerializedDictionaryInstanceDrawer>();
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {

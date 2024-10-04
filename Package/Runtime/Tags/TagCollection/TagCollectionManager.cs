@@ -45,8 +45,8 @@ namespace TMPEffects.Tags.Collections
             this.union = new NonAdjustingTagCollection();
             this.union.SetItems(union);
 
-            collections = new();
-            prefixToKey = new();
+            collections = new Dictionary<TKey, ObservableTagCollection>();
+            prefixToKey = new Dictionary<char, TKey>();
             foreach (var coll in entries)
             {
                 if (coll.Key == null) throw new System.ArgumentNullException(nameof(coll.Key));

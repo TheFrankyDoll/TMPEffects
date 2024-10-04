@@ -94,7 +94,7 @@ namespace TMPEffects.Components
             Mediator.SetVisibilityState(0, Mediator.Text.textInfo.characterCount, visibility);
         }
 
-        [System.NonSerialized] private readonly object obj = new();
+        [System.NonSerialized] private readonly object obj = new object();
         [System.NonSerialized] private TMPMediator mediator = null;
         [System.NonSerialized] private TMP_Text text = null;
 

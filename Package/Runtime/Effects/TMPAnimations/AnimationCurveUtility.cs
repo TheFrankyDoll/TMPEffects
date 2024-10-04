@@ -16,7 +16,7 @@ namespace TMPEffects.Extensions
         #region Linear
         public static AnimationCurve Linear()
         {
-            return LinearBezier(new(0, 0), new(1, 1));
+            return LinearBezier(new Vector2(0, 0), new Vector2(1, 1));
         }
         #endregion
 

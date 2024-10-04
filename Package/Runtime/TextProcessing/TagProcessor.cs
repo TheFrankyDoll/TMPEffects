@@ -25,8 +25,8 @@ namespace TMPEffects.TextProcessing
 
         public TagProcessor(ITMPTagValidator validator)
         {
-            processedTags = new();
-            ProcessedTags = new(processedTags);
+            processedTags = new List<KeyValuePair<TMPEffectTagIndices, TMPEffectTag>>();
+            ProcessedTags = new ReadOnlyCollection<KeyValuePair<TMPEffectTagIndices, TMPEffectTag>>(processedTags);
             this.validator = validator;
         }
 

@@ -13,7 +13,7 @@ namespace TMPEffects.Components.Mediator
     /// </summary>
     internal static class TMPMediatorManager
     {
-        public static Dictionary<GameObject, ValueTuple<TMPMediator, List<object>>> mediators = new();
+        public static Dictionary<GameObject, ValueTuple<TMPMediator, List<object>>> mediators = new Dictionary<GameObject, ValueTuple<TMPMediator, List<object>>>();
 
         /// <summary>
         /// Subscribe to the TMPMediatorManager.<br/>

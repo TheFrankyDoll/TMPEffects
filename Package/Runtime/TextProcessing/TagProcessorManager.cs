@@ -50,9 +50,9 @@ namespace TMPEffects.TextProcessing
 
         public TagProcessorManager()
         {
-            tagProcessors = new();
-            tagProcessorsRO = new();
-            TagProcessors = new(tagProcessorsRO);
+            tagProcessors = new Dictionary<char, List<TagProcessor>>();
+            tagProcessorsRO = new Dictionary<char, ReadOnlyCollection<TagProcessor>>();
+            TagProcessors = new ReadOnlyDictionary<char, ReadOnlyCollection<TagProcessor>>(tagProcessorsRO);
         }
 
         ///<inheritdoc/>

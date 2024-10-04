@@ -432,19 +432,19 @@ namespace TMPEffects.Components
         /// </summary>
         /// <param name="c">The character to check.</param>
         /// <returns>Whether the character is excluded from basic animations.</returns>
-        public bool IsExcludedBasic(char c) => (excludePunctuation && char.IsPunctuation(c)) || excludedCharacters.Contains(c);
+        public bool IsExcludedBasic(char c) => (excludePunctuation && char.IsPunctuation(c)) || excludedCharacters.Contains(c.ToString());
         /// <summary>
         /// Check whether the given character is excluded from show animations.
         /// </summary>
         /// <param name="c">The character to check.</param>
         /// <returns>Whether the character is excluded from show animations.</returns>
-        public bool IsExcludedShow(char c) => (excludePunctuationShow && char.IsPunctuation(c)) || excludedCharactersShow.Contains(c);
+        public bool IsExcludedShow(char c) => (excludePunctuationShow && char.IsPunctuation(c)) || excludedCharactersShow.Contains(c.ToString());
         /// <summary>
         /// Check whether the given character is excluded from hide animations.
         /// </summary>
         /// <param name="c">The character to check.</param>
         /// <returns>Whether the character is excluded from hide animations.</returns>
-        public bool IsExcludedHide(char c) => (excludePunctuationHide && char.IsPunctuation(c)) || excludedCharactersHide.Contains(c);
+        public bool IsExcludedHide(char c) => (excludePunctuationHide && char.IsPunctuation(c)) || excludedCharactersHide.Contains(c.ToString());
 
         /// <summary>
         /// Reset the time of the animator.
@@ -599,7 +599,7 @@ namespace TMPEffects.Components
             //hide = new CachedCollection<CachedAnimation>(new AnimationCacher(hideCategory, roCDataState, context, roCData, (x) => !IsExcludedHide(x)), tags.AddKey(hideCategory));
 
             // Reset processors
-            processors ??= new();
+            processors ??= new TagProcessorManager();
             processors.UnregisterFrom(Mediator.Processor);
             processors.Clear();
 

@@ -106,7 +106,7 @@ namespace TMPEffects.TextProcessing
                 if (searchIndex != tagInfo.startIndex)
                 {
                     currentOrderAtIndex = 0;
-                    sb.Append(text.AsSpan(searchIndex, tagInfo.startIndex - searchIndex));
+                    sb.Append(text.Substring(searchIndex, tagInfo.startIndex - searchIndex));
                 }
 
                 // If the current tag is a noparse tag, toggle whether to parse the succeeding text
@@ -228,7 +228,7 @@ namespace TMPEffects.TextProcessing
                 if (!parse)
                 {
                     currentOrderAtIndex = 0;
-                    sb.Append(text.AsSpan(tagInfo.startIndex, tagInfo.endIndex - tagInfo.startIndex + 1));
+                    sb.Append(text.Substring(tagInfo.startIndex, tagInfo.endIndex - tagInfo.startIndex + 1));
                     searchIndex = tagInfo.endIndex + 1;
                     continue;
                 }
@@ -236,7 +236,7 @@ namespace TMPEffects.TextProcessing
                 // Handle the tag; if it fails, meaning this is not a valid custom tag, append the tag to the StringBuilder
                 if (!HandleTag(ref tagInfo, tagInfo.startIndex + indexOffset, currentOrderAtIndex))
                 {
-                    sb.Append(text.AsSpan(tagInfo.startIndex, tagInfo.endIndex - tagInfo.startIndex + 1));
+                    sb.Append(text.Substring(tagInfo.startIndex, tagInfo.endIndex - tagInfo.startIndex + 1));
 
                     // Dont reset order, as this might be a valid native tag, meaning the previous
                     // and the next tag may still share an index; if not thats fine, order will just start
@@ -255,7 +255,7 @@ namespace TMPEffects.TextProcessing
             }
 
             // Append any text that came after the last tag
-            sb.Append(text.AsSpan(searchIndex, text.Length - searchIndex));
+            sb.Append(text.Substring(searchIndex, text.Length - searchIndex));
 
             string parsed;
             parsed = sb.ToString();
@@ -279,10 +279,10 @@ namespace TMPEffects.TextProcessing
             BeginAdjustIndices?.Invoke(info.textComponent.text);
 
             // Create a mapping from TagProcessor to their tags with mutable indices
-            Dictionary<TagProcessor, List<KeyValuePair<Indices, TMPEffectTag>>> dict = new();
+            Dictionary<TagProcessor, List<KeyValuePair<Indices, TMPEffectTag>>> dict = new Dictionary<TagProcessor, List<KeyValuePair<Indices, TMPEffectTag>>>();
             foreach (var processor in processors)
             {
-                dict.Add(processor, new());
+                dict.Add(processor, new List<KeyValuePair<Indices, TMPEffectTag>>());
                 foreach (var tag in processor.ProcessedTags)
                 {
                     dict[processor].Add(new KeyValuePair<Indices, TMPEffectTag>(new Indices(tag.Key), tag.Value));
@@ -338,7 +338,7 @@ namespace TMPEffects.TextProcessing
         private TagProcessorManager processors;
 
         private StringBuilder sb;
-        private Stack<TMP_Style> styles = new();
+        private Stack<TMP_Style> styles = new Stack<TMP_Style>();
 
         private bool HandleTag(ref ParsingUtility.TagInfo tagInfo, int textIndex, int order)
         {

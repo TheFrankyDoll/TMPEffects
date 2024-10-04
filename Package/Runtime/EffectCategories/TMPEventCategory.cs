@@ -17,7 +17,7 @@ namespace TMPEffects.EffectCategories
             data = null;
             endIndex = tagInfo.startIndex;
             if (tagInfo.prefix != Prefix) return false;
-            TMPEffectTag tagData = new(tagInfo.name, tagInfo.prefix, ParsingUtility.GetTagParametersDict(tagInfo.parameterString));
+            TMPEffectTag tagData = new TMPEffectTag(tagInfo.name, tagInfo.prefix, ParsingUtility.GetTagParametersDict(tagInfo.parameterString));
             data = tagData;
             return true;
         }

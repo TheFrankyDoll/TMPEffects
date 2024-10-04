@@ -54,7 +54,7 @@ namespace TMPEffects.SerializedCollections.Editor.Search
                     if (matcher.IsMatch(child))
                     {
                         if (matchingProperties == null)
-                            matchingProperties = new();
+                            matchingProperties = new List<PropertySearchResult>();
                         matchingProperties.Add(new PropertySearchResult(child.Copy()));
                     }
                 }

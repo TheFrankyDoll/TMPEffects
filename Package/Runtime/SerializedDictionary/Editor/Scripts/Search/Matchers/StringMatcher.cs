@@ -7,7 +7,7 @@ namespace TMPEffects.SerializedCollections.Editor.Search
     {
         public override bool IsMatch(SerializedProperty property)
         {
-            if ((property.propertyType is SerializedPropertyType.String or SerializedPropertyType.Character) && property.stringValue.Contains(SearchString, System.StringComparison.OrdinalIgnoreCase))
+            if ((property.propertyType is SerializedPropertyType.String || property.propertyType is SerializedPropertyType.Character) && property.stringValue.Contains(SearchString, System.StringComparison.OrdinalIgnoreCase))
                 return true;
             return false;
         }

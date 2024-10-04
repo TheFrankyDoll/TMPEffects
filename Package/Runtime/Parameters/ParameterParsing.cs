@@ -664,7 +664,7 @@ namespace TMPEffects.Parameters
             return true;
         }
 
-        internal static bool SpanToVector2(ReadOnlySpan<char> span, out Vector2 result)
+        internal static bool SpanToVector2(string span, out Vector2 result)
         {
             result = new Vector2(0, 0);
             span = span.Trim();

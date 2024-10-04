@@ -512,7 +512,7 @@ namespace TMPEffects.Components
             //events = new CachedCollection<CachedEvent>(new EventCacher(this, OnTextEvent), tags.AddKey(eventCategory));
 
             // Reset processors
-            processors ??= new();
+            processors ??= new TagProcessorManager();
             processors.UnregisterFrom(Mediator.Processor);
             processors.Clear();
 
@@ -762,7 +762,8 @@ namespace TMPEffects.Components
                 if (shouldWait && waitAmount > 0)
                 {
                     RaiseWaitStartedEvent(waitAmount);
-                    yield return useScaledTime ? new WaitForSeconds(waitAmount) : new WaitForSecondsRealtime(waitAmount);
+                    if (useScaledTime) yield return new WaitForSeconds(waitAmount);
+                    else yield return new WaitForSecondsRealtime(waitAmount);
                     RaiseWaitEndedEvent();
                 }
                 FixTimePost(waitAmount);
@@ -796,7 +797,8 @@ namespace TMPEffects.Components
                     if (shouldWait && waitAmount > 0)
                     {
                         RaiseWaitStartedEvent(waitAmount);
-                        yield return useScaledTime ? new WaitForSeconds(waitAmount) : new WaitForSecondsRealtime(waitAmount);
+                        if (useScaledTime) yield return new WaitForSeconds(waitAmount);
+                        else yield return new WaitForSecondsRealtime(waitAmount);
                         RaiseWaitEndedEvent();
                     }
                     FixTimePost(waitAmount);
@@ -812,7 +814,9 @@ namespace TMPEffects.Components
                 FixTimePre(ref delay);
                 if (delay > 0)
                 {
-                    yield return useScaledTime ? new WaitForSeconds(delay) : new WaitForSecondsRealtime(delay);
+                    if (useScaledTime) yield return new WaitForSeconds(delay);
+                    else yield return new WaitForSecondsRealtime(delay);
+
                     if (Mediator == null) yield break;
                 }
                 FixTimePost(delay);
@@ -1078,7 +1082,8 @@ namespace TMPEffects.Components
                     if (shouldWait && waitAmount > 0)
                     {
                         RaiseWaitStartedEvent(waitAmount);
-                        yield return useScaledTime ? new WaitForSeconds(waitAmount) : new WaitForSecondsRealtime(waitAmount);
+                        if (useScaledTime) yield return new WaitForSeconds(waitAmount);
+                        else yield return new WaitForSecondsRealtime(waitAmount);
                         RaiseWaitEndedEvent();
                     }
                     if (continueConditions != null) yield return HandleWaitConditions();
@@ -1105,7 +1110,9 @@ namespace TMPEffects.Components
                     if (shouldWait && waitAmount > 0)
                     {
                         RaiseWaitStartedEvent(waitAmount);
-                        yield return useScaledTime ? new WaitForSeconds(waitAmount) : new WaitForSecondsRealtime(waitAmount);
+                        if (useScaledTime) yield return new WaitForSeconds(waitAmount);
+                        else yield return new WaitForSecondsRealtime(waitAmount);
+
                         RaiseWaitEndedEvent();
                     }
                     if (continueConditions != null) yield return HandleWaitConditions();

@@ -335,7 +335,7 @@ namespace TMPEffects.Tags.Collections
             }
         }
 
-        private Dictionary<int, MinMax> minMax = new();
+        private Dictionary<int, MinMax> minMax = new Dictionary<int, MinMax>();
 
         private List<T> cache = new List<T>();
         private ITagCacher<T> cacher;
@@ -494,7 +494,7 @@ namespace TMPEffects.Tags.Collections
 
                 case NotifyCollectionChangedAction.Reset:
                     cache.TrimExcess();
-                    minMax.TrimExcess();
+                    //minMax.TrimExcess(); //Not available in C# 8.0  We wipe 'minMax' right after - is this necessary?
                     cache.Clear();
                     minMax.Clear();
                     break;
